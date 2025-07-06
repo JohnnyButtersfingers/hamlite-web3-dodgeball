@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import './GameArena.css'
 
-const GameArena = ({ account, provider }) => {
+const GameArena = ({ account }) => {
   const [gameState, setGameState] = useState('waiting') // waiting, playing, gameOver
   const [players, setPlayers] = useState([])
   const [balls, setBalls] = useState([])

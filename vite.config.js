@@ -15,4 +15,13 @@ export default defineConfig({
   optimizeDeps: {
     include: ['buffer', 'process'],
   },
+  build: {
+    rollupOptions: {
+      external: [],
+    },
+  },
+  server: {
+    port: 3000,
+    open: true,
+  },
 })
