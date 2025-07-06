@@ -1,149 +1,38 @@
-name: CI/CD Pipeline
+name: Deploy to Vercel
 
 on:
   push:
-    branches: [ main, develop ]
+    branches:
+      - main
   pull_request:
-    branches: [ main, develop ]
+    branches:
+      - main
 
 jobs:
-  test:
+  deploy:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run linter
-      run: npm run lint
-      continue-on-error: true
-    
-    - name: Run tests
-      run: npm test
-    
-    - name: Run build
-      run: npm run build
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  security-scan:
-    runs-on: ubuntu-latest
-    needs: test
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Run security audit
-      run: npm audit --audit-level high
-      continue-on-error: true
-    
-    - name: Run Snyk to check for vulnerabilities
-      uses: snyk/actions/node@master
-      continue-on-error: true
-      env:
-        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
 
-  deploy-staging:
-    runs-on: ubuntu-latest
-    needs: [test, security-scan]
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
-    
-    environment:
-      name: staging
-      url: ${{ steps.deploy.outputs.url }}
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build application
-      run: npm run build
-      env:
-        NODE_ENV: staging
-    
-    - name: Deploy to staging
-      id: deploy
-      run: |
-        echo "Deploying to staging environment..."
-        # Add your staging deployment commands here
-        # For example:
-        # npm run deploy:staging
-        # or use cloud provider CLIs
-        echo "url=https://staging.your-domain.com" >> $GITHUB_OUTPUT
+      - name: Install dependencies
+        run: npm ci
 
-  deploy-production:
-    runs-on: ubuntu-latest
-    needs: [test, security-scan]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    
-    environment:
-      name: production
-      url: ${{ steps.deploy.outputs.url }}
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Use Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20.x'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Build application
-      run: npm run build
-      env:
-        NODE_ENV: production
-    
-    - name: Deploy to production
-      id: deploy
-      run: |
-        echo "Deploying to production environment..."
-        # Add your production deployment commands here
-        # For example:
-        # npm run deploy:production
-        # or use cloud provider CLIs
-        echo "url=https://your-domain.com" >> $GITHUB_OUTPUT
-    
-    - name: Notify deployment success
-      if: success()
-      run: |
-        echo "🚀 Production deployment successful!"
-        # Add notification logic here (Slack, Discord, etc.)
-    
-    - name: Notify deployment failure
-      if: failure()
-      run: |
-        echo "❌ Production deployment failed!"
-        # Add failure notification logic here
+      - name: Build frontend
+        run: npm run build
+        env:
+          VITE_ABS_RPC_URL: ${{ secrets.VITE_ABS_RPC_URL }}
+          VITE_PINATA_API_KEY: ${{ secrets.VITE_PINATA_API_KEY }}
+          VITE_PINATA_SECRET_API_KEY: ${{ secrets.VITE_PINATA_SECRET_API_KEY }}
 
-  cleanup:
-    runs-on: ubuntu-latest
-    needs: [deploy-staging, deploy-production]
-    if: always()
-    
-    steps:
-    - name: Cleanup temporary files
-      run: |
-        echo "Cleaning up temporary files..."
-        # Add cleanup commands here
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Deploy to Vercel
+        run: vercel --prod --token ${{ secrets.VERCEL_TOKEN }}
