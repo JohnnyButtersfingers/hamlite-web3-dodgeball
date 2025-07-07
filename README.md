@@ -1,5 +1,7 @@
 # Hamlite Web3 Dodgeball 🎮⚡
 
+<!-- Deployment trigger: 2025-07-07 - All GitHub Secrets configured -->
+
 A Web3-enabled dodgeball game built with React and deployed on the Abstract blockchain network.
 
 ## 🚀 Features
