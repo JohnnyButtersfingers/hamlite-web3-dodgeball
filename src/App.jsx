@@ -14,33 +14,74 @@ function App() {
   const [networkName, setNetworkName] = useState('')
   const [gameMode, setGameMode] = useState('hamster-sports') // New: Game mode selection
 
+  // Helper function to check if we're in Abstract Portal environment
+  const isAbstractPortal = () => {
+    return window.ethereum && (
+      window.ethereum.isAbstract || 
+      window.ethereum.selectedAddress || 
+      window.location.origin.includes('portal.abs.xyz')
+    )
+  }
+
+  // Helper function to redirect to Abstract Portal
+  const redirectToAbstractPortal = () => {
+    const portalUrl = 'https://portal.abs.xyz/'
+    window.open(portalUrl, '_blank')
+    alert('Please connect through the Abstract Portal to use this app. A new tab has been opened for you.')
+  }
+
   const connectWallet = async () => {
-    if (window.ethereum) {
-      try {
-        setIsConnecting(true)
-        const accounts = await window.ethereum.request({
-          method: 'eth_requestAccounts',
-        })
-        setAccount(accounts[0])
-        
-        const provider = new ethers.BrowserProvider(window.ethereum)
-        setProvider(provider)
-        
-        // Get network info
-        const network = await provider.getNetwork()
-        setNetworkName(network.name)
-        setIsConnected(true)
-        
-        // Try to switch to Abstract Network
-        await switchToAbstractNetwork()
-      } catch (error) {
-        console.error('Error connecting wallet:', error)
-        alert('Error connecting wallet. Please try again.')
-      } finally {
-        setIsConnecting(false)
+    try {
+      setIsConnecting(true)
+      
+      // If no wallet provider, redirect to Abstract Portal
+      if (!window.ethereum) {
+        redirectToAbstractPortal()
+        return
       }
-    } else {
-      alert('Please install a Web3 wallet (MetaMask, Abstract Wallet, or compatible) to play this game!')
+      
+      // Check current network
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' })
+      
+      // If not on Abstract Network, guide user to Abstract Portal
+      if (chainId !== '0x28c58') {
+        const shouldRedirect = confirm(
+          'This app works best on the Abstract Network. Would you like to open the Abstract Portal for the optimal experience?'
+        )
+        if (shouldRedirect) {
+          redirectToAbstractPortal()
+          return
+        }
+      }
+      
+      // Connect to wallet
+      const accounts = await window.ethereum.request({
+        method: 'eth_requestAccounts',
+      })
+      setAccount(accounts[0])
+      
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      setProvider(provider)
+      
+      // Get network info
+      const network = await provider.getNetwork()
+      setNetworkName(network.name)
+      setIsConnected(true)
+      
+      // Try to switch to Abstract Network if not already there
+      if (chainId !== '0x28c58') {
+        await switchToAbstractNetwork()
+      }
+      
+    } catch (error) {
+      console.error('Error connecting wallet:', error)
+      if (error.code === 4001) {
+        alert('Connection rejected. Please try connecting again.')
+      } else {
+        alert('Error connecting wallet. Please use the Abstract Portal for the best experience.')
+      }
+    } finally {
+      setIsConnecting(false)
     }
   }
 
@@ -117,10 +158,13 @@ function App() {
               className="connect-btn"
               disabled={isConnecting}
             >
-              {isConnecting ? 'Connecting...' : 'Connect to Play'}
+              {isConnecting ? 'Connecting...' : 'Connect via Abstract Portal'}
             </button>
             <p className="info-text">
-              Connect your Abstract wallet to predict hamster sports matches and earn XP!
+              Connect through the Abstract Portal to predict hamster sports matches and earn XP!
+            </p>
+            <p className="portal-info">
+              <strong>Best Experience:</strong> Use the <a href="https://portal.abs.xyz/" target="_blank" rel="noopener noreferrer">Abstract Portal</a> for seamless connection
             </p>
             <div className="features">
               <div className="feature">
