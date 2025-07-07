@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
 
 import GameArena from './components/GameArena'
+import HamsterSports from './components/HamsterSports'
 
 import './App.css'
 
@@ -11,6 +12,7 @@ function App() {
   const [isConnecting, setIsConnecting] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
   const [networkName, setNetworkName] = useState('')
+  const [gameMode, setGameMode] = useState('hamster-sports') // New: Game mode selection
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -105,8 +107,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>🏐 Hamlite Web3 Dodgeball</h1>
-        <p>Decentralized Dodgeball Game on Abstract Network</p>
+        <h1>🐹 Hamlite Hamster Sports Arena</h1>
+        <p>Predict. Play. Win. on Abstract Network</p>
         
         {!isConnected ? (
           <div className="connect-section">
@@ -115,23 +117,27 @@ function App() {
               className="connect-btn"
               disabled={isConnecting}
             >
-              {isConnecting ? 'Connecting...' : 'Connect Abstract Wallet'}
+              {isConnecting ? 'Connecting...' : 'Connect to Play'}
             </button>
             <p className="info-text">
-              Connect your Abstract wallet (MetaMask, Abstract Wallet, or compatible) to start playing!
+              Connect your Abstract wallet to predict hamster sports matches and earn XP!
             </p>
             <div className="features">
               <div className="feature">
-                <span className="feature-icon">🎮</span>
-                <span>Interactive Gameplay</span>
+                <span className="feature-icon">🐹</span>
+                <span>4-Team Hamster Battles</span>
+              </div>
+              <div className="feature">
+                <span className="feature-icon">�</span>
+                <span>Prediction System</span>
               </div>
               <div className="feature">
                 <span className="feature-icon">🏆</span>
-                <span>Score System</span>
+                <span>MVP Voting & XP</span>
               </div>
               <div className="feature">
-                <span className="feature-icon">🔗</span>
-                <span>Web3 Integration</span>
+                <span className="feature-icon">🎲</span>
+                <span>Provably Fair RNG</span>
               </div>
             </div>
           </div>
@@ -144,13 +150,35 @@ function App() {
                 Disconnect
               </button>
             </div>
-            <GameArena account={account} provider={provider} />
+            
+            {/* Game Mode Selection */}
+            <div className="game-mode-selector">
+              <button 
+                className={`mode-btn ${gameMode === 'hamster-sports' ? 'active' : ''}`}
+                onClick={() => setGameMode('hamster-sports')}
+              >
+                🐹 Hamster Sports
+              </button>
+              <button 
+                className={`mode-btn ${gameMode === 'classic-dodgeball' ? 'active' : ''}`}
+                onClick={() => setGameMode('classic-dodgeball')}
+              >
+                🏐 Classic Dodgeball
+              </button>
+            </div>
+
+            {/* Render Selected Game Mode */}
+            {gameMode === 'hamster-sports' ? (
+              <HamsterSports account={account} provider={provider} />
+            ) : (
+              <GameArena account={account} provider={provider} />
+            )}
           </div>
         )}
         
         <footer className="footer">
           <p>Built with React, Vite, and Ethers.js</p>
-          <p>Deployed on Abstract Network</p>
+          <p>Hamster Sports powered by Abstract Network</p>
         </footer>
       </header>
     </div>
