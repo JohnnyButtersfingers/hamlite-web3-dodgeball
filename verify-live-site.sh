@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Verify Live Site - Hamlite Web3 Dodgeball
+# Verify Live Site - Hamlite Web3 Dodgecho -e "${YELLOW}🔗 GitHub Actions: https://github.com/JohnnyButtersfingers/hamlite-web3-dodgeball/actions${NC}"
+echo -e "${YELLOW}📊 Vercel Dashboard: https://vercel.com/dashboard${NC}"all
 # This script tests the live deployment on Vercel
 
 echo "🔍 Verifying Live Site Deployment..."
