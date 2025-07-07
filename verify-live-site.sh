@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# Verify Live Site - Hamlite Web3 Dodgecho -e "${YELLOW}🔗 GitHub Actions: https://github.com/JohnnyButtersfingers/hamlite-web3-dodgeball/actions${NC}"
-echo -e "${YELLOW}📊 Vercel Dashboard: https://vercel.com/dashboard${NC}"all
+# Verify Live Site - Hamlite Web3 Dodgeball
 # This script tests the live deployment on Vercel
 
 echo "🔍 Verifying Live Site Deployment..."
@@ -155,7 +154,7 @@ echo
 echo "🎯 Manual Verification Steps:"
 echo "=============================="
 echo "1. 🌐 Visit your Vercel URL in a browser"
-echo "2. 🦊 Test wallet connection with MetaMask"
+echo "2. 🔗 Test Abstract wallet connection (MetaMask, Abstract Wallet, or compatible)"
 echo "3. 🎮 Try starting a game and verify gameplay"
 echo "4. 🔧 Check browser console for any errors (F12)"
 echo "5. 📱 Test on mobile device for responsiveness"
@@ -165,8 +164,8 @@ echo
 
 echo "🔧 Web3 Testing Checklist:"
 echo "========================="
-echo "✅ Wallet connects without errors"
-echo "✅ Network switches to Abstract testnet"
+echo "✅ Abstract wallet connects without errors"
+echo "✅ Network switches to Abstract blockchain"
 echo "✅ Game starts and runs smoothly"
 echo "✅ Score system updates correctly"
 echo "✅ Health bars display properly"
@@ -177,7 +176,7 @@ echo
 echo "🚨 Common Issues & Solutions:"
 echo "============================"
 echo "❌ Site won't load → Check GitHub Actions deployment status"
-echo "❌ Wallet won't connect → Ensure MetaMask is installed and unlocked"
+echo "❌ Wallet won't connect → Ensure Abstract wallet/MetaMask is installed and unlocked"
 echo "❌ Game won't start → Check browser console for JavaScript errors"
 echo "❌ Mobile issues → Test viewport and touch event handling"
 echo "❌ Performance issues → Check network tab for slow loading assets"

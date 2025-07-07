@@ -38,7 +38,7 @@ function App() {
         setIsConnecting(false)
       }
     } else {
-      alert('Please install MetaMask to play this game!')
+      alert('Please install a Web3 wallet (MetaMask, Abstract Wallet, or compatible) to play this game!')
     }
   }
 
@@ -115,10 +115,10 @@ function App() {
               className="connect-btn"
               disabled={isConnecting}
             >
-              {isConnecting ? 'Connecting...' : 'Connect Wallet'}
+              {isConnecting ? 'Connecting...' : 'Connect Abstract Wallet'}
             </button>
             <p className="info-text">
-              Connect your MetaMask wallet to start playing!
+              Connect your Abstract wallet (MetaMask, Abstract Wallet, or compatible) to start playing!
             </p>
             <div className="features">
               <div className="feature">
