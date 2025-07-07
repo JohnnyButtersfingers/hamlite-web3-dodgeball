@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { ethers } from 'ethers'
+
 import GameArena from './components/GameArena'
+
 import './App.css'
 
 function App() {

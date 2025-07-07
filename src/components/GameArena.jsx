@@ -127,12 +127,25 @@ const GameArena = ({ account }) => {
         </div>
       </div>
 
-      <div className="game-field" onClick={(e) => {
-        if (gameState === 'playing') {
-          const rect = e.currentTarget.getBoundingClientRect()
-          throwBall(e.clientX - rect.left, e.clientY - rect.top)
-        }
-      }}>
+      <div 
+        className="game-field" 
+        onClick={(e) => {
+          if (gameState === 'playing') {
+            const rect = e.currentTarget.getBoundingClientRect()
+            throwBall(e.clientX - rect.left, e.clientY - rect.top)
+          }
+        }}
+        onKeyDown={(e) => {
+          if (gameState === 'playing' && (e.key === 'Enter' || e.key === ' ')) {
+            e.preventDefault()
+            const rect = e.currentTarget.getBoundingClientRect()
+            throwBall(rect.width / 2, rect.height / 2)
+          }
+        }}
+        tabIndex={0}
+        role="button"
+        aria-label="Click to throw ball"
+      >
         {/* Players */}
         {players.map(player => (
           <div
