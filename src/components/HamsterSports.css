@@ -14,7 +14,7 @@
   align-items: center;
   justify-content: center;
   min-height: 400px;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
 }
 
 .loading-spinner {
@@ -44,7 +44,7 @@
 
 .arena-header h2 {
   margin: 0 0 16px 0;
-  color: var(--retro-black);
+  color: var(--cheese-orange);
   font-size: 28px;
   background: linear-gradient(135deg, var(--retro-red) 0%, var(--neon-yellow) 100%);
   -webkit-background-clip: text;
@@ -90,7 +90,7 @@
 }
 
 .match-round {
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   font-size: 14px;
   opacity: 0.7;
 }
@@ -121,7 +121,7 @@
 .team-name {
   font-weight: bold;
   font-size: 18px;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   margin-bottom: 8px;
 }
 
@@ -132,7 +132,7 @@
 }
 
 .hamster-name {
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   font-size: 14px;
   opacity: 0.7;
 }
@@ -140,7 +140,7 @@
 .vs-divider {
   font-size: 24px;
   font-weight: bold;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   padding: 0 16px;
 }
 

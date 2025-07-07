@@ -14,6 +14,9 @@
   --cloud-white: #FFFFFF;
   --retro-black: #18181B;
   --soft-grey: #E4E4E7;
+  
+  /* Abstract Network Colors */
+  --abstract-green: #00D4AA;
 }
 
 .App {
@@ -42,16 +45,13 @@
   font-size: 2.5rem;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(135deg, var(--retro-red) 0%, var(--neon-yellow) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--cheese-orange);
 }
 
 .App-header p {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   opacity: 0.8;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .connect-btn, .disconnect-btn {
-  background: linear-gradient(135deg, var(--retro-red) 0%, var(--cheese-orange) 100%);
+  background: linear-gradient(135deg, var(--abstract-green) 0%, var(--fresh-green) 100%);
   color: var(--cloud-white);
   border: none;
   padding: 12px 24px;
@@ -74,13 +74,13 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 4px 12px rgba(255, 75, 75, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
 }
 
 .connect-btn:hover, .disconnect-btn:hover {
-  background: linear-gradient(135deg, var(--cheese-orange) 0%, var(--retro-red) 100%);
+  background: linear-gradient(135deg, var(--fresh-green) 0%, var(--abstract-green) 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 75, 75, 0.4);
+  box-shadow: 0 6px 16px rgba(0, 212, 170, 0.4);
 }
 
 .connect-btn:disabled {
@@ -102,7 +102,7 @@
 }
 
 .info-text {
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   font-size: 1.1rem;
   margin: 0;
   margin-bottom: 1rem;
@@ -117,7 +117,7 @@
   border: 2px solid var(--soft-grey);
   margin-bottom: 20px;
   font-size: 0.95rem;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
 
@@ -179,7 +179,7 @@
 
 .wallet-info span {
   font-weight: bold;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
 }
 
 .footer {
@@ -192,7 +192,7 @@
 .footer p {
   margin: 0.25rem 0;
   font-size: 0.9rem;
-  color: var(--retro-black);
+  color: var(--arcade-blue);
 }
 
 /* Game Mode Selector */
@@ -208,7 +208,7 @@
   padding: 12px 24px;
   border: 2px solid var(--soft-grey);
   background: var(--cloud-white);
-  color: var(--retro-black);
+  color: var(--arcade-blue);
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;

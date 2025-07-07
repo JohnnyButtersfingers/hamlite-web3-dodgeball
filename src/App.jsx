@@ -158,7 +158,7 @@ function App() {
               className="connect-btn"
               disabled={isConnecting}
             >
-              {isConnecting ? 'Connecting...' : 'Connect via Abstract Portal'}
+              {isConnecting ? 'Connecting...' : 'ABS Login'}
             </button>
             <p className="info-text">
               Connect through the Abstract Portal to predict hamster sports matches and earn XP!
