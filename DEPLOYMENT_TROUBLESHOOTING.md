@@ -20,9 +20,11 @@ Go to your repository settings → Secrets and variables → Actions, and ensure
 | Secret Name | Description | How to Get |
 |-------------|-------------|------------|
 | `VERCEL_TOKEN` | Vercel API token | [Generate at vercel.com/account/tokens](https://vercel.com/account/tokens) |
-| `VITE_ABS_RPC_URL` | Abstract Network RPC URL | Use: `https://api.testnet.abs.xyz` |
+| `VITE_ABS_RPC_URL` | Abstract Network RPC URL | Use: `https://rpc.abstract.xyz` |
 | `VITE_PINATA_API_KEY` | Pinata API key | [Get from pinata.cloud](https://pinata.cloud/keys) |
 | `VITE_PINATA_SECRET_API_KEY` | Pinata secret key | [Get from pinata.cloud](https://pinata.cloud/keys) |
+| `VITE_AIRTABLE_API_KEY` | Airtable API key | [Get from airtable.com/developers](https://airtable.com/developers/web/api/introduction) |
+| `VITE_AIRTABLE_BASE_ID` | Airtable base ID | From your Airtable base URL |
 
 ### 3. Common Issues & Solutions
 
