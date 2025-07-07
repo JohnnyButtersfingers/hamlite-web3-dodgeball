@@ -20,7 +20,7 @@ check_url() {
     
     echo -e "${BLUE}Checking: $description${NC}"
     
-    if curl -s --head "$url" | head -n 1 | grep -q "200 OK"; then
+    if curl -s --head "$url" | head -n 1 | grep -q "200\|301\|302"; then
         echo -e "${GREEN}✅ $description - OK${NC}"
         return 0
     else

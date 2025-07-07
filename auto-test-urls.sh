@@ -19,6 +19,7 @@ echo -e "${BLUE}Project name: $PROJECT_NAME${NC}"
 
 # Common Vercel URL patterns
 POSSIBLE_URLS=(
+    "https://hamlites-projects-5da7fa6a.vercel.app"
     "https://hamlite-web3-dodgeball.vercel.app"
     "https://hamlite-web3-dodgeball-git-main.vercel.app"
     "https://hamlite-web3-dodgeball-johnnybuttersfingers.vercel.app"
